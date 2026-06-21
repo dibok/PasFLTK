@@ -2,21 +2,6 @@ program counter;
 
 {$mode objfpc}{$H+}
 
-//{$LIBRARYPATH /usr/X11/lib;/usr/local/lib}
-//{$LIBRARYPATH /usr/lib/gcc/x86_64-pc-linux-gnu}
-///usr/lib/gcc/x86_64-pc-linux-gnu/16.1.1/;libs
-
-//{$LIBRARYPATH ../libs}
-//{$LINKLIB cfltk}
-{
-{$LINKLIB fltk_forms}
-{$LINKLIB fltk_images}
-{$LINKLIB fltk_jpeg}
-{$LINKLIB fltk_png}
-{$LINKLIB fltk_z}
-{$LINKLIB fltk}
-{$LINKLIB stdc++} }
-
 uses
   {$IFDEF UNIX}
   cthreads,
