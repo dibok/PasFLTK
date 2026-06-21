@@ -12,7 +12,7 @@ Free Pascal bindings for FLTK / CFLTK GUI. But should also work in Embarcadero D
 </p>
 
 ## Versioning
-Version number is synchronized with CFLTK version. So "1.5.23.1" mean that binding was made on CFLT version 1.5.23. The last part "1" is actualy PasFLTK version which will be increased in case of bug fixes / missing features
+Version number is synchronized with CFLTK version. So "1.5.23.1" mean that binding was made on CFLTK version 1.5.23. The last part "1" is actualy PasFLTK version which will be increased in case of bug fixes / missing features
 
 ## Tested platforms
 - Linux CachyOS (arch)
