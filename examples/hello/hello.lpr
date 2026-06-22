@@ -28,7 +28,7 @@ begin
   Fl_init_all();        // init all styles
   Fl_register_images(); // necessary for image support
   Fl_lock();            // necessary for multithreaded support
-  w := Fl_Window_new(100, 100, 400, 300, nil);
+  w := Fl_Window_new(100, 100, 400, 300, 'Free Pascal Hello demo');
   b := Fl_Button_new(160, 210, 80, 40, 'Click me');
   Fl_Window_end(w);
   Fl_Window_show(w);
