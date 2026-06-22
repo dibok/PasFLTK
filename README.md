@@ -12,7 +12,13 @@ Free Pascal bindings for FLTK / CFLTK GUI. But should also work in Embarcadero D
 </p>
 
 ## Versioning
-Version number is synchronized with CFLTK version. So "1.5.23.1" mean that binding was made on CFLTK version 1.5.23. The last part "1" is actualy PasFLTK version which will be increased in case of bug fixes / missing features
+Version number is synchronized with CFLTK version. So "1.5.23.2" mean that binding was made on CFLTK version 1.5.23. The last part "2" is actualy PasFLTK version which will be increased in case of bug fixes / missing features
+
+Version: 1.5.23.2
+
+For CFLTK version: 1.5.23
+
+For FLTK version: 1.4.5
 
 ## Tested platforms
 - Linux CachyOS (arch)
@@ -44,7 +50,7 @@ cmake -B bin -S . \
 ```
 cmake --build bin --parallel
 ```
-5. This will produce one single libcfltk.so / fltk.dll library containing CFLTK and also FLTK source. You don't need separated libfltk.so, libfltk_images.so, libfltk_forms.so etc. Everything your app need will be in one libcfltk.so / fltk.dll. You can find it in "cfltk/bin" directory.
+5. This will produce one single libcfltk.so / cfltk.dll library containing CFLTK and also FLTK source. You don't need separated libfltk.so, libfltk_images.so, libfltk_forms.so etc. Everything your app need will be in one libcfltk.so / cfltk.dll. You can find it in "cfltk/bin" directory.
 
 ## Building project using PasFLTK
 ### Using Lazarus

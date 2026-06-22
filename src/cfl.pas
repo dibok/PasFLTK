@@ -43,11 +43,11 @@ uses
     include/out/cfl.h
 }
 
-  const
-    External_library='libcfltk'; {Setup as you need}
-    cPASFLTK_VER = '1.5.23.1';
-    cPASFLTK_CFLTK_VER = '1.5.23';
-    cPASFLTK_FLTK_VER = '1.4.5';
+const
+  External_library={$ifdef unix}'libcfltk.so'{$else}'cfltk.dll'{$endif};
+  cPASFLTK_VER = '1.5.23.2';
+  cPASFLTK_CFLTK_VER = '1.5.23';
+  cPASFLTK_FLTK_VER = '1.4.5';
 
 {$IFDEF FPC}
 {$PACKRECORDS C}

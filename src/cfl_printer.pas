@@ -39,8 +39,8 @@ interface
     include/out/cfl_printer.h
 }
 
-  const
-    External_library='libcfltk'; {Setup as you need}
+const
+  External_library={$ifdef unix}'libcfltk.so'{$else}'cfltk.dll'{$endif};
 
 {$IFDEF FPC}
 {$PACKRECORDS C}
