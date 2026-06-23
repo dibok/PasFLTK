@@ -12,9 +12,9 @@ Free Pascal bindings for FLTK / CFLTK GUI. But should also work in Embarcadero D
 </p>
 
 ## Versioning
-Version number is synchronized with CFLTK version. So "1.5.23.2" mean that binding was made on CFLTK version 1.5.23. The last part "2" is actualy PasFLTK version which will be increased in case of bug fixes / missing features
+Version number is synchronized with CFLTK version. So "1.5.23.3" mean that binding was made on CFLTK version 1.5.23. The last part "3" is actualy PasFLTK version which will be increased in case of bug fixes / missing features
 
-Version: 1.5.23.2
+Version: 1.5.23.3
 
 For CFLTK version: 1.5.23
 
@@ -52,7 +52,7 @@ cmake --build bin --parallel
 ```
 5. This will produce one single libcfltk.so / cfltk.dll library containing CFLTK and also FLTK source. You don't need separated libfltk.so, libfltk_images.so, libfltk_forms.so etc. Everything your app need will be in one libcfltk.so / cfltk.dll. You can find it in "cfltk/bin" directory.
 
-## Building project using PasFLTK
+## Building project using PasFLTK and shared libs (default)
 ### Using Lazarus
 Open some example or create new project and use this very simple hello demo:
 ```pascal
@@ -149,75 +149,25 @@ hello.lpr
 ```
 Now your app will run without `LD_LIBRARY_PATH` and use libcfltk.so from "libs" dir where your executable is. Make sure to copy it there
 
-## Other static linking options
-Free Pascal can link C static *.a libs. I was able to make app which doesn't use libcfltk.so and libfltk.so at all. Just one single and small executable which contain C/C++ binary code. To do so, I build CFLTK and FLTK with `-DFLTK_BUILD_SHARED_LIBS=OFF` and `-DCFLTK_BUILD_SHARED=OFF` which produced *.a libs only. Then in simple demo I linked these libs and all dependencies (order has matter!):
-```pascal
-program basicdemo;
+## Building project using PasFLTK and static libs (experimental with not solved bugs)
+Free Pascal can link C static *.a libs. I was able to make app which doesn't use libcfltk.so and libfltk.so at all. Just one single and small executable which contain C/C++ binary code. But it has bug which I'm not able to solve. I think it is "Static Initialization Order Fiasco" issue but then why exactly the same demo written in C works fine? 
 
-{$mode objfpc}{$H+}
-{$LINKLIB cfltk}
-{$LINKLIB fltk_forms}
-{$LINKLIB fltk_images}
-{$LINKLIB fltk_jpeg}
-{$LINKLIB fltk_png}
-{$LINKLIB fltk_z}
-{$LINKLIB fltk}
-{$LINKLIB X11}
-{$LINKLIB Xext}
-{$LINKLIB pthread}
-{$LINKLIB Xinerama}
-{$LINKLIB Xfixes}
-{$LINKLIB Xcursor}
-{$LINKLIB Xft}
-{$LINKLIB Xrender}
-{$LINKLIB fontconfig}
-//{$LINKLIB pango-1.0}
-//{$LINKLIB pangoxft-1.0}
-//{$LINKLIB gobject-2.0}
-//{$LINKLIB cairo}
-//{$LINKLIB pangocairo-1.0}
-{$LINKLIB dl}
-{$linklib m}
-{$LINKLIB stdc++}
-
-
-uses
-  {$IFDEF UNIX}
-  cthreads,
-  {$ENDIF}
-  Classes,
-
-  cfl,
-  cfl_window,
-  cfl_button,
-  cfl_image,
-  cfl_widget,
-  cfl_macros,
-  cfl_box,
-  cfl_browser,
-  cfl_dialog
-  { you can add units after this };
-var
-  w: Pwidget;
-  b: PFl_Button;
-  p: Fl_Callback;
-
-procedure cb(w: PFl_Widget; data: Pointer); cdecl;
-begin
-  Fl_Widget_set_label(w, 'Worksśćą!');
-  Fl_file_chooser_show(PChar(''), PChar(''), PChar(''), 0);
-end;
-
-begin
-  Fl_init_all(); // init all styles
-  Fl_register_images(); // necessary for image support
-  Fl_lock(); // necessary for multithreaded support
-  w := Fl_Window_new(100, 100, 400, 300, 'Test');
-  b := Fl_Button_new(160, 210, 120, 40, 'Click me');
-  Fl_Window_end(w);
-  Fl_Window_show(w);
-  Fl_Button_set_callback(b, @cb, nil);
-  Fl_run;
-end.
+To enable static linking:
+1. Build CFLTK and FLTK with `-DFLTK_BUILD_SHARED_LIBS=OFF` and `-DCFLTK_BUILD_SHARED=OFF` which produce *.a libs only. Then in simple demo I linked these libs and all dependencies (order has matter!):
+2. Make sure that `Project -> Project options -> Compiler options -> Paths` point to directory which contain *.a libs instead of *.so / *.dll.
+3. Switch PasFLTK to static linking by setting `-dUSE_FLTK_STATIC` in `Project -> Project options -> Compiler options -> Other options` or in command line:
 ```
-Demo is running but has bugs, for example `Fl_file_chooser_show` is crashing with SIGSEGV. That is due to some C++ constructors beeing initializad earlier than other. Don't know how to fix that. I guess that this is not possible or even is not a good practice. Shared libraries are better solutions but you need to deploy extra ~4MB lib, static linking would produce extremely small executable but don't know if it is possible to solve this issue, `--whole-archive` switch didn't fix it either.
+/usr/bin/fpc
+....
+-dUSE_FLTK_STATIC
+....
+static_error_to_solve.lpr
+```
+4. You can use a demo which shows problematic SIGSEGV error. You can find it in `/test/static_error_to_solve.lpr`
+5. Demo is running but has bugs, for example `Fl_file_chooser_show` is crashing with SIGSEGV. Problem is in `Fl_File_Chooser2.cxx` in const:
+```C
+const char      *Fl_File_Chooser::filesystems_label = Fl::system_driver()->filesystems_label();   
+```
+Seems like `Fl_File_Chooser` is initialized before `Fl_System_Driver` class which result with const beeing empty (null). Is it "Static Initialization Order Fiasco"? But then why the same demo written in C works? `ldd` command shows that C and FPC demo link to the same libs and even in the same order. I guess that this is not possible or even is not a good practice. Shared libraries are better solutions but you need to deploy extra ~4MB lib, static linking would produce extremely small executable without dependencies but don't know if it is possible to solve this issue, `--whole-archive` switch didn't fix it either.
+
+If someone could help me with this I would be grateful

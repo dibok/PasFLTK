@@ -39,8 +39,10 @@ interface
     include/out/cfl_lock.h
 }
 
-const
-  External_library={$ifdef unix}'libcfltk.so'{$else}'cfltk.dll'{$endif};
+  {$IFNDEF USE_FLTK_STATIC}
+    const
+      External_library={$IFDEF unix}'libcfltk.so'{$ELSE}'cfltk.dll'{$ENDIF};
+  {$ENDIF}
 
 {$IFDEF FPC}
 {$PACKRECORDS C}
@@ -48,9 +50,9 @@ const
 
 {$ifndef __CFL_LOCK_H__}
 
-  procedure Fl_mutex_lock;cdecl;external External_library name 'Fl_mutex_lock';
+  procedure Fl_mutex_lock;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_mutex_lock';
 
-  procedure Fl_mutex_unlock;cdecl;external External_library name 'Fl_mutex_unlock';
+  procedure Fl_mutex_unlock;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_mutex_unlock';
 
 {$ifndef LOCK}
 {$endif}

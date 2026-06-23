@@ -39,8 +39,10 @@ interface
     include/out/cfl_surface.h
 }
 
-const
-  External_library={$ifdef unix}'libcfltk.so'{$else}'cfltk.dll'{$endif};
+  {$IFNDEF USE_FLTK_STATIC}
+    const
+      External_library={$IFDEF unix}'libcfltk.so'{$ELSE}'cfltk.dll'{$ENDIF};
+  {$ENDIF}
 
 {$IFDEF FPC}
 {$PACKRECORDS C}
@@ -58,49 +60,49 @@ type
   Fl_SVG_File_Surface = record end;
 (* ====== *)
 
-  procedure Fl_Surface_Device_set_current(self: PFl_Surface_Device);cdecl;external External_library name 'Fl_Surface_Device_set_current';
+  procedure Fl_Surface_Device_set_current(self: PFl_Surface_Device);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Surface_Device_set_current';
 
-  function Fl_Surface_Device_is_current(self: PFl_Surface_Device):longint;cdecl;external External_library name 'Fl_Surface_Device_is_current';
+  function Fl_Surface_Device_is_current(self: PFl_Surface_Device):longint;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Surface_Device_is_current';
 
-  function Fl_Surface_Device_surface:PFl_Surface_Device;cdecl;external External_library name 'Fl_Surface_Device_surface';
+  function Fl_Surface_Device_surface:PFl_Surface_Device;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Surface_Device_surface';
 
-  procedure Fl_Surface_Device_push_current(new_current: PFl_Surface_Device);cdecl;external External_library name 'Fl_Surface_Device_push_current';
+  procedure Fl_Surface_Device_push_current(new_current: PFl_Surface_Device);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Surface_Device_push_current';
 
-  function Fl_Surface_Device_pop_current:PFl_Surface_Device;cdecl;external External_library name 'Fl_Surface_Device_pop_current';
+  function Fl_Surface_Device_pop_current:PFl_Surface_Device;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Surface_Device_pop_current';
 
-  function Fl_Image_Surface_new(w:longint; h:longint; high_res:longint):PFl_Image_Surface;cdecl;external External_library name 'Fl_Image_Surface_new';
+  function Fl_Image_Surface_new(w:longint; h:longint; high_res:longint):PFl_Image_Surface;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Image_Surface_new';
 
-  procedure Fl_Image_Surface_delete(s: PFl_Image_Surface);cdecl;external External_library name 'Fl_Image_Surface_delete';
+  procedure Fl_Image_Surface_delete(s: PFl_Image_Surface);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Image_Surface_delete';
 
-  procedure Fl_Image_Surface_set_current(self: PFl_Image_Surface);cdecl;external External_library name 'Fl_Image_Surface_set_current';
+  procedure Fl_Image_Surface_set_current(self: PFl_Image_Surface);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Image_Surface_set_current';
 
-  function Fl_Image_Surface_is_current(self: PFl_Image_Surface):longint;cdecl;external External_library name 'Fl_Image_Surface_is_current';
+  function Fl_Image_Surface_is_current(self: PFl_Image_Surface):longint;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Image_Surface_is_current';
 
-  function Fl_Image_Surface_image(self: PFl_Image_Surface):pointer;cdecl;external External_library name 'Fl_Image_Surface_image';
+  function Fl_Image_Surface_image(self: PFl_Image_Surface):pointer;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Image_Surface_image';
 
-  function Fl_Image_Surface_highres_image(self: PFl_Image_Surface):pointer;cdecl;external External_library name 'Fl_Image_Surface_highres_image';
+  function Fl_Image_Surface_highres_image(self: PFl_Image_Surface):pointer;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Image_Surface_highres_image';
 
-  procedure Fl_Image_Surface_origin(self: PFl_Image_Surface; x: Plongint; y: Plongint);cdecl;external External_library name 'Fl_Image_Surface_origin';
+  procedure Fl_Image_Surface_origin(self: PFl_Image_Surface; x: Plongint; y: Plongint);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Image_Surface_origin';
 
-  procedure Fl_Image_Surface_set_origin(self: PFl_Image_Surface; x:longint; y:longint);cdecl;external External_library name 'Fl_Image_Surface_set_origin';
+  procedure Fl_Image_Surface_set_origin(self: PFl_Image_Surface; x:longint; y:longint);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Image_Surface_set_origin';
 
-  procedure Fl_Image_Surface_rescale(self: PFl_Image_Surface);cdecl;external External_library name 'Fl_Image_Surface_rescale';
+  procedure Fl_Image_Surface_rescale(self: PFl_Image_Surface);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Image_Surface_rescale';
 
-  procedure Fl_Image_Surface_draw(self: PFl_Image_Surface; widget:pointer; delta_x:longint; delta_y:longint);cdecl;external External_library name 'Fl_Image_Surface_draw';
+  procedure Fl_Image_Surface_draw(self: PFl_Image_Surface; widget:pointer; delta_x:longint; delta_y:longint);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Image_Surface_draw';
 
-  procedure Fl_Image_Surface_draw_decorated_window(self: PFl_Image_Surface; widget:pointer; delta_x:longint; delta_y:longint);cdecl;external External_library name 'Fl_Image_Surface_draw_decorated_window';
+  procedure Fl_Image_Surface_draw_decorated_window(self: PFl_Image_Surface; widget:pointer; delta_x:longint; delta_y:longint);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Image_Surface_draw_decorated_window';
 
-  function Fl_SVG_File_Surface_new(width:longint; height:longint; _file:Pchar):PFl_SVG_File_Surface;cdecl;external External_library name 'Fl_SVG_File_Surface_new';
+  function Fl_SVG_File_Surface_new(width:longint; height:longint; _file:Pchar):PFl_SVG_File_Surface;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_SVG_File_Surface_new';
 
-  procedure Fl_SVG_File_Surface_delete(self: PFl_SVG_File_Surface);cdecl;external External_library name 'Fl_SVG_File_Surface_delete';
+  procedure Fl_SVG_File_Surface_delete(self: PFl_SVG_File_Surface);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_SVG_File_Surface_delete';
 
-  procedure Fl_SVG_File_Surface_origin(self: PFl_SVG_File_Surface; x:longint; y:longint);cdecl;external External_library name 'Fl_SVG_File_Surface_origin';
+  procedure Fl_SVG_File_Surface_origin(self: PFl_SVG_File_Surface; x:longint; y:longint);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_SVG_File_Surface_origin';
 
-  function Fl_SVG_File_Surface_printable_rect(self: PFl_SVG_File_Surface; w: Plongint; h: Plongint):longint;cdecl;external External_library name 'Fl_SVG_File_Surface_printable_rect';
+  function Fl_SVG_File_Surface_printable_rect(self: PFl_SVG_File_Surface; w: Plongint; h: Plongint):longint;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_SVG_File_Surface_printable_rect';
 
-  procedure Fl_SVG_File_Surface_draw(self: PFl_SVG_File_Surface; widget:pointer; delta_x:longint; delta_y:longint);cdecl;external External_library name 'Fl_SVG_File_Surface_draw';
+  procedure Fl_SVG_File_Surface_draw(self: PFl_SVG_File_Surface; widget:pointer; delta_x:longint; delta_y:longint);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_SVG_File_Surface_draw';
 
-  procedure Fl_SVG_File_Surface_draw_decorated_window(self: PFl_SVG_File_Surface; widget:pointer; delta_x:longint; delta_y:longint);cdecl;external External_library name 'Fl_SVG_File_Surface_draw_decorated_window';
+  procedure Fl_SVG_File_Surface_draw_decorated_window(self: PFl_SVG_File_Surface; widget:pointer; delta_x:longint; delta_y:longint);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_SVG_File_Surface_draw_decorated_window';
 
 { C++ end of extern C conditionnal removed }
 {$endif}
