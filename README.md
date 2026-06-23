@@ -5,7 +5,7 @@ Free Pascal bindings for FLTK / CFLTK GUI. But should also work in Embarcadero D
 
 [CFLTK repository](https://github.com/MoAlyousef/cfltk)
 
-## Screenshot of "scheme" demo
+## Screenshot of "scheme" example (examples/scheme/scheme.lpr)
 
 <p align="center">
   <img src="examples/scheme/screen.png">
