@@ -39,7 +39,7 @@ interface
     include/out/cfl_utils.h
 }
 
-  {$IFNDEF USE_FLTK_STATIC}
+  {$IFDEF USE_FLTK_SHARED_LIBS}
     const
       External_library={$IFDEF unix}'libcfltk.so'{$ELSE}'cfltk.dll'{$ENDIF};
   {$ENDIF}
@@ -50,13 +50,13 @@ interface
 
 {$ifndef __CFL_UTILS_H__}
 
-  function Fl_filename_expand(_out:Pchar; len:longint; _in:Pchar):longint;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_filename_expand';
+  function Fl_filename_expand(_out:Pchar; len:longint; _in:Pchar):longint;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_filename_expand';
 
-  function Fl_type_name(w:pointer):Pchar;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_type_name';
+  function Fl_type_name(w:pointer):Pchar;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_type_name';
 
-  function Fl_open_uri(uri:Pchar; msg:Pchar; msglen:longint):longint;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_open_uri';
+  function Fl_open_uri(uri:Pchar; msg:Pchar; msglen:longint):longint;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_open_uri';
 
-  procedure Fl_decode_uri(uri:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_decode_uri';
+  procedure Fl_decode_uri(uri:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_decode_uri';
 
 { C++ end of extern C conditionnal removed }
 {$endif}

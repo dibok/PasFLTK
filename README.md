@@ -12,32 +12,42 @@ Free Pascal bindings for FLTK / CFLTK GUI. But should also work in Embarcadero D
 </p>
 
 ## Versioning
-Version number is synchronized with CFLTK version. So "1.5.23.3" mean that binding was made on CFLTK version 1.5.23. The last part "3" is actualy PasFLTK version which will be increased in case of bug fixes / missing features
+Version number is synchronized with CFLTK version. So "1.5.23.4" mean that binding was made on CFLTK version 1.5.23. The last part "4" is actualy PasFLTK version which will be increased in case of bug fixes / missing features
 
-Version: 1.5.23.3
+Version: 1.5.23.4
 
 For CFLTK version: 1.5.23
 
 For FLTK version: 1.4.5
+
+## History
+- 1.5.23.4: Finally fixed static linking issues and make it as default instead of shared libs
+- 1.5.23.3: Experimental static linking
+- 1.5.23.2: New demos
+- 1.5.23.1: First version
 
 ## Tested platforms
 - Linux CachyOS (arch)
 - I need help to someone test it also on macos and windows
 
 ## Building CFLTK and FLTK libs (linux)
-You need to get FLTK and CFLTK sources first and build them. 
+You need to get FLTK and CFLTK sources first and build them. Depending on whether you want to make your app as statically linking libs (libcfltk.a, libfltk.a, etc) whis is default or use shared library (PasFLT `-dUSE_FLTK_SHARED_LIBS` option), you need to build CFLTK and FLTK with `-DFLTK_BUILD_SHARED_LIBS` and `-DCFLTK_BUILD_SHARED` set to `ON` or `OFF`:
+- Static linking (default from version 1.5.23.4): Your executable will contain all necessary C / C++ code. You don't need to deploy any libraries related to CFLTK / FLTK, only OS / platform. This will produce larger executable file but in summary it is smaller than prividing shared libs because linker use only necessary objects from *.a libs
+- Shared linking. Your executable will be smaller but you need to deploy CFLT / FLTK libraries with your app (libcfltk.so, lifltk.so / cfltk.dll, fltk.dll). See "Deploying your app" section for more info.
+
+Prepare CFLTK and FLTK:
 1. Extract CFLTK to some directory, for example "cfltk". 
 2. Then extract FLTK and move everything to the "cfltk/fltk" directory
-3. In "cfltk" root directory, call `cmake` command and make sure that it build shared libraries (*.so / *.dll) instead of static *.a. You must use `-DFLTK_BUILD_SHARED_LIBS` and `-DCFLTK_BUILD_SHARED` switch.  For example (if you need pango or cairo, swith it on):
+3. In "cfltk" root directory, call `cmake` command. Depending if you want static linking or shared libs, you must use `-DFLTK_BUILD_SHARED_LIBS` and `-DCFLTK_BUILD_SHARED` switch.  For example (if you need pango or cairo, swith it on) for static linking:
 ```
 cmake -B bin -S . \
                 -DCMAKE_BUILD_TYPE=Release \
                 -DFLTK_USE_SYSTEM_LIBPNG=OFF \
                 -DFLTK_USE_SYSTEM_LIBJPEG=OFF \
                 -DFLTK_USE_SYSTEM_ZLIB=OFF \
-                -DFLTK_BUILD_SHARED_LIBS=ON \
+                -DFLTK_BUILD_SHARED_LIBS=OFF \
                 -DCFLTK_BUILD_SHARED=OFF \
-                -DBUILD_SHARED_LIBS=ON \
+                -DBUILD_SHARED_LIBS=OFF \
                 -DFLTK_BUILD_GL=OFF \
                 -DFLTK_BUILD_EXAMPLES=ON \
                 -DFLTK_BUILD_TEST=ON \
@@ -50,9 +60,9 @@ cmake -B bin -S . \
 ```
 cmake --build bin --parallel
 ```
-5. This will produce one single libcfltk.so / cfltk.dll library containing CFLTK and also FLTK source. You don't need separated libfltk.so, libfltk_images.so, libfltk_forms.so etc. Everything your app need will be in one libcfltk.so / cfltk.dll. You can find it in "cfltk/bin" directory.
+5. This will produce series of *.a libs or in case of shared libs - one single libcfltk.so / cfltk.dll library containing CFLTK and also FLTK source. In shared libs mode you don't need separated libfltk.so, libfltk_images.so, libfltk_forms.so etc. Everything your app need will be in one libcfltk.so / cfltk.dll. You can find libcfltk.a / libcflt.so/dll in "cfltk/bin" directory and FLTK *.a libs in "cfltk/bin/fltk/lib" directory.
 
-## Building project using PasFLTK and shared libs (default)
+## Building project using PasFLTK
 ### Using Lazarus
 Open some example or create new project and use this very simple hello demo:
 ```pascal
@@ -99,10 +109,12 @@ begin
 end.  
 ```
 
-In lazarus `Project->Project options`. Go to `Compiler options -> Paths` and add path to PasFLTK source (-Fu) and your libcfltk.so / cfltk.dll library (-Fl).
+In lazarus `Project->Project options`. Go to `Compiler options -> Paths` and add path to PasFLTK source (-Fu) and your *.a / libcfltk.so / cfltk.dll libraries (-Fl). If you are using shared libs, then you need to set `-dUSE_FLTK_SHARED_LIBS` in your `Project->Project options -> Compiler options -> Other options` or in commandline.
+On linux, in case of static linking, you need to also add path (-Fl) to `libgcc` which in most cases is in `/usr/lib/gcc/x86_64-pc-linux-gnu/16.1.1/`. Otherwise you may get linking errors about missing `crtbeginS.o` and `crtendS.o`. If you are using commandline to compile your project then you can set it by adding `-Fl/usr/lib/gcc/x86_64-pc-linux-gnu/16.1.1`.
+
 Now you can build your project.
 ### Using command line
-Go to your project or demo dir and run this command. It expect that libcfltk.so / cfltk.dll is in local "libs" dir and PasFLTK source in local "PasFLTK" dir. Change that for your need.
+Go to your project or demo dir and run this command. It expect that *.a / libcfltk.so / cfltk.dll libs are in local "libs" dir and PasFLTK source in local "PasFLTK" dir. Change that for your need. Also remember about `-dUSE_FLTK_SHARED_LIBS` in case of shared linking.
 ```
 /usr/bin/fpc
 -MObjFPC
@@ -127,8 +139,8 @@ hello.lpr
 ```
 
 ## Deploying your app
-- On windows, simply copy cfltk.dll into executable directory and that is it.
-- On linux, if you want your app use libcfltk.so from directory where executable is, then you have two options:
+- On windows, if you are using shared libs, simply copy cfltk.dll into executable directory and that is it. In case of static linking, you don't need to do anything.
+- On linux, if you are using shared libs and you want your app use libcfltk.so from directory where executable is, then you have two options:
 Create `run.sh` script which point to your local dir:
 ```
 #!/bin/bash
@@ -147,9 +159,17 @@ Second option is special `-rpath` linker option. You can set it in Lazarus `Proj
 ....
 hello.lpr
 ```
-Now your app will run without `LD_LIBRARY_PATH` and use libcfltk.so from "libs" dir where your executable is. Make sure to copy it there
+Now your app will run without `LD_LIBRARY_PATH` and use libcfltk.so from "libs" dir where your executable is. Make sure to copy it there.
 
-## Building project using PasFLTK and static libs (experimental with not solved bugs)
+In case of static linking on linux, you don't need to provide this lib. But you may need some OS missing libs (especially when using cairo or pango). You can check this by running `ldd <your_app_executable>`
+
+## Other compiling options
+If you want to use cairo or pango in FLTK, then in your project you need to set `-dUSE_FLTK_PANGO` / `-dUSE_FLTK_CAIRO`. This functionality is not tested yet.
+
+## ~~Building project using PasFLTK and static libs (experimental with not solved bugs)~~
+<span style="color:red">Fixed in version 1.5.23.4</span>
+
+<del>
 Free Pascal can link C static *.a libs. I was able to make app which doesn't use libcfltk.so and libfltk.so at all. Just one single and small executable which contain C/C++ binary code. But it has bug which I'm not able to solve. I think it is "Static Initialization Order Fiasco" issue but then why exactly the same demo written in C works fine? 
 
 To enable static linking:
@@ -171,3 +191,4 @@ const char      *Fl_File_Chooser::filesystems_label = Fl::system_driver()->files
 Seems like `Fl_File_Chooser` is initialized before `Fl_System_Driver` class which result with const beeing empty (null). Is it "Static Initialization Order Fiasco"? But then why the same demo written in C works? `ldd` command shows that C and FPC demo link to the same libs and even in the same order. I guess that this is not possible or even is not a good practice. Shared libraries are better solutions but you need to deploy extra ~4MB lib, static linking would produce extremely small executable without dependencies but don't know if it is possible to solve this issue, `--whole-archive` switch didn't fix it either.
 
 If someone could help me with this I would be grateful
+</del>

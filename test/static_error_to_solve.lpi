@@ -7,7 +7,6 @@
         <MainUnitHasCreateFormStatements Value="False"/>
         <MainUnitHasTitleStatement Value="False"/>
         <MainUnitHasScaledStatement Value="False"/>
-        <UseDefaultCompilerOptions Value="True"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <Title Value="static_error_to_solve"/>
@@ -47,12 +46,9 @@
         <DebugInfoType Value="dsDwarf3"/>
       </Debugging>
       <Options>
-        <LinkerOptions Value="--whole-archive -lfltk -lcfltk --no-whole-archive"/>
+        <LinkerOptions Value="-veb"/>
       </Options>
     </Linking>
-    <Other>
-      <CustomOptions Value="-dUSE_FLTK_STATIC"/>
-    </Other>
   </CompilerOptions>
   <Debugging>
     <Exceptions>

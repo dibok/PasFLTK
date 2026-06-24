@@ -37,7 +37,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <Libraries Value="/usr/lib/gcc/x86_64-pc-linux-gnu/16.1.1/;../libs"/>
+      <Libraries Value="/usr/lib/gcc/x86_64-pc-linux-gnu/16.1.1/;../libs_static"/>
       <OtherUnitFiles Value="../../src"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
@@ -46,7 +46,6 @@
         <DebugInfoType Value="dsDwarf3"/>
       </Debugging>
       <Options>
-        <PassLinkerOptions Value="True"/>
         <LinkerOptions Value="-rpath=$ORIGIN/../libs"/>
       </Options>
     </Linking>

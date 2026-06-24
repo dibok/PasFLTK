@@ -39,7 +39,7 @@ interface
     include/out/cfl_macros.h
 }
 
-  {$IFNDEF USE_FLTK_STATIC}
+  {$IFDEF USE_FLTK_SHARED_LIBS}
     const
       External_library={$IFDEF unix}'libcfltk.so'{$ELSE}'cfltk.dll'{$ENDIF};
   {$ENDIF}

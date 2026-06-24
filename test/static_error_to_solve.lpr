@@ -18,12 +18,17 @@ uses
   cfl_browser,
   cfl_dialog
   { you can add units after this };
+
 var
   w: Pwidget;
   b: PFl_Button;
 
+
 procedure cb(w: PFl_Widget; data: Pointer); cdecl;
 begin
+  // Edit. Finally solved this bug. See method RunCppGlobalConstructors
+  // in cfl.pas for more info
+
   // If we uncomment this line then SIGSEGV is gone.
   //Fl_File_Chooser_set_filesystems_label('test');
 
@@ -38,6 +43,7 @@ begin
     the same libs are linked and even in the same order. I'm lost
   }
   Fl_file_chooser_show(PChar(''), PChar(''), PChar(''), 0);
+  Fl_alert2('Bug is finally fixed!!');
 end;
 
 begin

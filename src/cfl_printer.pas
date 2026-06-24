@@ -39,7 +39,7 @@ interface
     include/out/cfl_printer.h
 }
 
-  {$IFNDEF USE_FLTK_STATIC}
+  {$IFDEF USE_FLTK_SHARED_LIBS}
     const
       External_library={$IFDEF unix}'libcfltk.so'{$ELSE}'cfltk.dll'{$ENDIF};
   {$ENDIF}
@@ -56,79 +56,79 @@ type
   Fl_Printer = record end;
 (* ====== *)
 
-  function Fl_Printer_new:PFl_Printer;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_new';
+  function Fl_Printer_new:PFl_Printer;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_new';
 
-  procedure Fl_Printer_delete(self: PFl_Printer);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_delete';
+  procedure Fl_Printer_delete(self: PFl_Printer);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_delete';
 
-  function Fl_Printer_begin_job(self: PFl_Printer; pagecount:longint; frompage: Plongint; topage: Plongint; perr_message:PPchar):longint;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_begin_job';
+  function Fl_Printer_begin_job(self: PFl_Printer; pagecount:longint; frompage: Plongint; topage: Plongint; perr_message:PPchar):longint;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_begin_job';
 
-  function Fl_Printer_begin_page(self: PFl_Printer):longint;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_begin_page';
+  function Fl_Printer_begin_page(self: PFl_Printer):longint;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_begin_page';
 
-  function Fl_Printer_printable_rect(self: PFl_Printer; w: Plongint; h: Plongint):longint;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_printable_rect';
+  function Fl_Printer_printable_rect(self: PFl_Printer; w: Plongint; h: Plongint):longint;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_printable_rect';
 
-  procedure Fl_Printer_margins(self: PFl_Printer; left: Plongint; top: Plongint; right: Plongint; bottom: Plongint);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_margins';
+  procedure Fl_Printer_margins(self: PFl_Printer; left: Plongint; top: Plongint; right: Plongint; bottom: Plongint);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_margins';
 
-  procedure Fl_Printer_origin(self: PFl_Printer; x: Plongint; y: Plongint);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_origin';
+  procedure Fl_Printer_origin(self: PFl_Printer; x: Plongint; y: Plongint);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_origin';
 
-  procedure Fl_Printer_set_origin(self: PFl_Printer; x:longint; y:longint);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_origin';
+  procedure Fl_Printer_set_origin(self: PFl_Printer; x:longint; y:longint);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_origin';
 
-  procedure Fl_Printer_scale(self: PFl_Printer; scale_x:single; scale_y:single);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_scale';
+  procedure Fl_Printer_scale(self: PFl_Printer; scale_x:single; scale_y:single);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_scale';
 
-  procedure Fl_Printer_rotate(self: PFl_Printer; angle:single);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_rotate';
+  procedure Fl_Printer_rotate(self: PFl_Printer; angle:single);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_rotate';
 
-  procedure Fl_Printer_translate(self: PFl_Printer; x:longint; y:longint);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_translate';
+  procedure Fl_Printer_translate(self: PFl_Printer; x:longint; y:longint);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_translate';
 
-  procedure Fl_Printer_untranslate(self: PFl_Printer);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_untranslate';
+  procedure Fl_Printer_untranslate(self: PFl_Printer);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_untranslate';
 
-  function Fl_Printer_end_page(self: PFl_Printer):longint;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_end_page';
+  function Fl_Printer_end_page(self: PFl_Printer):longint;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_end_page';
 
-  procedure Fl_Printer_end_job(self: PFl_Printer);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_end_job';
+  procedure Fl_Printer_end_job(self: PFl_Printer);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_end_job';
 
-  procedure Fl_Printer_set_current(self: PFl_Printer);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_current';
+  procedure Fl_Printer_set_current(self: PFl_Printer);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_current';
 
-  function Fl_Printer_is_current(self: PFl_Printer):longint;cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_is_current';
+  function Fl_Printer_is_current(self: PFl_Printer):longint;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_is_current';
 
-  procedure Fl_Printer_print_widget(self: PFl_Printer; widget:pointer; delta_x:longint; delta_y:longint);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_print_widget';
+  procedure Fl_Printer_print_widget(self: PFl_Printer; widget:pointer; delta_x:longint; delta_y:longint);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_print_widget';
 
-  procedure Fl_Printer_print_window(self: PFl_Printer; w_in:pointer; x_offset:longint; y_offset:longint);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_print_window';
+  procedure Fl_Printer_print_window(self: PFl_Printer; w_in:pointer; x_offset:longint; y_offset:longint);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_print_window';
 
-  procedure Fl_Printer_set_dialog_title(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_dialog_title';
+  procedure Fl_Printer_set_dialog_title(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_dialog_title';
 
-  procedure Fl_Printer_set_dialog_printer(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_dialog_printer';
+  procedure Fl_Printer_set_dialog_printer(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_dialog_printer';
 
-  procedure Fl_Printer_set_dialog_range(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_dialog_range';
+  procedure Fl_Printer_set_dialog_range(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_dialog_range';
 
-  procedure Fl_Printer_set_dialog_copies(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_dialog_copies';
+  procedure Fl_Printer_set_dialog_copies(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_dialog_copies';
 
-  procedure Fl_Printer_set_dialog_all(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_dialog_all';
+  procedure Fl_Printer_set_dialog_all(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_dialog_all';
 
-  procedure Fl_Printer_set_dialog_pages(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_dialog_pages';
+  procedure Fl_Printer_set_dialog_pages(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_dialog_pages';
 
-  procedure Fl_Printer_set_dialog_from(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_dialog_from';
+  procedure Fl_Printer_set_dialog_from(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_dialog_from';
 
-  procedure Fl_Printer_set_dialog_to(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_dialog_to';
+  procedure Fl_Printer_set_dialog_to(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_dialog_to';
 
-  procedure Fl_Printer_set_dialog_properties(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_dialog_properties';
+  procedure Fl_Printer_set_dialog_properties(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_dialog_properties';
 
-  procedure Fl_Printer_set_dialog_copyNo(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_dialog_copyNo';
+  procedure Fl_Printer_set_dialog_copyNo(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_dialog_copyNo';
 
-  procedure Fl_Printer_set_dialog_print_button(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_dialog_print_button';
+  procedure Fl_Printer_set_dialog_print_button(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_dialog_print_button';
 
-  procedure Fl_Printer_set_dialog_cancel_button(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_dialog_cancel_button';
+  procedure Fl_Printer_set_dialog_cancel_button(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_dialog_cancel_button';
 
-  procedure Fl_Printer_set_dialog_print_to_file(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_dialog_print_to_file';
+  procedure Fl_Printer_set_dialog_print_to_file(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_dialog_print_to_file';
 
-  procedure Fl_Printer_set_property_title(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_property_title';
+  procedure Fl_Printer_set_property_title(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_property_title';
 
-  procedure Fl_Printer_set_property_pagesize(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_property_pagesize';
+  procedure Fl_Printer_set_property_pagesize(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_property_pagesize';
 
-  procedure Fl_Printer_set_property_mode(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_property_mode';
+  procedure Fl_Printer_set_property_mode(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_property_mode';
 
-  procedure Fl_Printer_set_property_use(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_property_use';
+  procedure Fl_Printer_set_property_use(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_property_use';
 
-  procedure Fl_Printer_set_property_save(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_property_save';
+  procedure Fl_Printer_set_property_save(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_property_save';
 
-  procedure Fl_Printer_set_property_cancel(msg:Pchar);cdecl;external {$IFNDEF USE_FLTK_STATIC}External_library {$ENDIF}name 'Fl_Printer_set_property_cancel';
+  procedure Fl_Printer_set_property_cancel(msg:Pchar);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Printer_set_property_cancel';
 
 { C++ end of extern C conditionnal removed }
 {$endif}
