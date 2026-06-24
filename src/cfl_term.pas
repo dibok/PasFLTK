@@ -39,7 +39,7 @@ uses
     -l
     libcfltk
     -o
-    /home/dibo/praca/projects/PasFLTK/src/cfl_term.pas
+    PasFLTK/src/cfl_term.pas
     include/out/cfl_term.h
 }
 

@@ -35,7 +35,7 @@ interface
     -l
     libcfltk
     -o
-    /home/dibo/praca/projects/PasFLTK/src/cfl_draw.pas
+    PasFLTK/src/cfl_draw.pas
     include/out/cfl_draw.h
 }
 
