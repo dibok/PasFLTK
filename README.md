@@ -1,6 +1,34 @@
 # PasFLTK
 Free Pascal bindings for FLTK / CFLTK GUI. But should also work in Embarcadero Delphi.
 
+FLTK is a lightweight, cross‑platform C++ GUI toolkit designed for speed, small binaries, and minimal dependencies. It provides modern GUI functionality without relying on Qt or GTK or Windows controls, making it ideal for portable, statically linked applications.
+
+<ins>**Key Advantages**</ins>
+- Lightweight architecture — FLTK is intentionally small, fast to compile, and produces compact executables. 
+- Cross‑platform — Supports Linux/UNIX (X11 & Wayland), Windows, and macOS with consistent APIs. 
+- No Qt or GTK or Windows controls required — FLTK provides its own widget set and rendering system, avoiding heavy external GUI frameworks. 
+- Static linking support (or optionally shared linking) — Designed to be modular and small enough for fully static builds. 
+- OpenGL support — Built‑in OpenGL and GLUT‑style API for 2D/3D graphics. 
+- FLUID UI designer — Includes a visual interface builder for rapid GUI creation. 
+- Simple, clean API — Focuses on straightforward event handling and minimal abstraction layers. 
+- Permissive licensing — LGPL with exceptions allowing static linking in commercial apps. 
+
+<ins>**Additional Features**</ins>
+- Consistent native‑style widgets across platforms.
+- Fast startup time — ideal for utilities and embedded tools.
+- Small dependency chain — avoids large frameworks and runtime engines.
+- Active open‑source development with clear documentation.
+
+<ins>**About Pango and Cairo in FLTK**</ins>
+
+Even though FLTK does not require GTK, it can optionally use Cairo and Pango when compiled with those features enabled:
+1. Cairo integration — FLTK can use Cairo as an alternative 2D drawing backend for high‑quality vector rendering.
+   - Enables anti‑aliased shapes, scalable graphics, and better text rendering.
+   - Some Linux distributions compile FLTK with Cairo enabled by default.
+2. Pango support — optional text layout engine for advanced international text shaping.
+   - Useful for complex scripts (Arabic, Indic, etc.).
+   - Not required for basic Latin text.
+
 [FLTK repository](https://github.com/fltk/fltk)
 
 [CFLTK repository](https://github.com/MoAlyousef/cfltk)
