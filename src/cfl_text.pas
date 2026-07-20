@@ -56,17 +56,17 @@ uses
 
 (* === Added / Modified by cfltk2pas === *)
 type
-  PFl_Text_Display = ^Fl_Text_Display;
+  PFl_Text_Editor = ^Fl_Text_Editor;
   PFl_Simple_Terminal = ^Fl_Simple_Terminal;
   PFl_Text_Buffer = ^Fl_Text_Buffer;
-  PFl_Text_Editor = ^Fl_Text_Editor;
+  PFl_Text_Display = ^Fl_Text_Display;
   Fl_Text_Buffer = record end;
-  Fl_Text_Editor = widget;
-  Fl_Simple_Terminal = widget;
-  Fl_Text_Display = widget;
-  Fl_Text_Predelete_Cb = procedure (pos:longint; nDeleted:longint; cbArg:pointer);cdecl;
-  Fl_Text_Modify_Cb = procedure (pos:longint; nInserted:longint; nDeleted:longint; nRestyled:longint; deletedText:Pchar;cbArg:pointer);cdecl;
+  Fl_Text_Editor = Fl_Widget;
+  Fl_Simple_Terminal = Fl_Widget;
+  Fl_Text_Display = Fl_Widget;
   Fl_Text_ArgCallback1 = function (_para1:longint; _para2:PFl_Text_Editor):longint;cdecl;
+  Fl_Text_Modify_Cb = procedure (pos:longint; nInserted:longint; nDeleted:longint; nRestyled:longint; deletedText:Pchar;cbArg:pointer);cdecl;
+  Fl_Text_Predelete_Cb = procedure (pos:longint; nDeleted:longint; cbArg:pointer);cdecl;
 (* ====== *)
 
   function Fl_Text_Buffer_new:PFl_Text_Buffer;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Text_Buffer_new';

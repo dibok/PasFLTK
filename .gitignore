@@ -1,2 +1,8 @@
 converter/
 examples/libs*
+*.o
+*.ppu
+*.lps
+*.bak
+*.compiled
+*.res

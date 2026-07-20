@@ -56,16 +56,16 @@ uses
 
 (* === Added / Modified by cfltk2pas === *)
 type
-  PFl_Menu_Button = ^Fl_Menu_Button;
-  PFl_Menu_Item = ^Fl_Menu_Item;
-  PFl_Menu_Bar = ^Fl_Menu_Bar;
   PFl_Choice = ^Fl_Choice;
   PFl_Sys_Menu_Bar = ^Fl_Sys_Menu_Bar;
+  PFl_Menu_Button = ^Fl_Menu_Button;
+  PFl_Menu_Bar = ^Fl_Menu_Bar;
+  PFl_Menu_Item = ^Fl_Menu_Item;
   Fl_Menu_Item = record end;
-  Fl_Sys_Menu_Bar = widget;
-  Fl_Menu_Button = widget;
-  Fl_Menu_Bar = widget;
-  Fl_Choice = widget;
+  Fl_Sys_Menu_Bar = Fl_Widget;
+  Fl_Choice = Fl_Widget;
+  Fl_Menu_Bar = Fl_Widget;
+  Fl_Menu_Button = Fl_Widget;
 (* ====== *)
 
   function Fl_Menu_Bar_new(x:longint; y:longint; width:longint; height:longint; title:Pchar):Pwidget;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Menu_Bar_new';

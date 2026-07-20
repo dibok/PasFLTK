@@ -57,7 +57,7 @@ uses
 (* === Added / Modified by cfltk2pas === *)
 type
   PFl_Box = ^Fl_Box;
-  Fl_Box = widget;
+  Fl_Box = Fl_Widget;
 (* ====== *)
 
   function Fl_Box_new(x:longint; y:longint; width:longint; height:longint; title:Pchar):Pwidget;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Box_new';

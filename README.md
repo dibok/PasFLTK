@@ -40,28 +40,41 @@ Even though FLTK does not require GTK, it can optionally use Cairo and Pango whe
 </p>
 
 ## Versioning
-Version number is synchronized with CFLTK version. So "1.5.23.4" mean that binding was made on CFLTK version 1.5.23. The last part "4" is actualy PasFLTK version which will be increased in case of bug fixes / missing features
+Version number is synchronized with CFLTK version. So "1.5.23.5" mean that binding was made on CFLTK version 1.5.23. The last part "5" is actualy PasFLTK version which will be increased in case of bug fixes / missing features
 
-Version: 1.5.23.4
+Version: 1.5.23.5
 
 For CFLTK version: 1.5.23
 
 For FLTK version: 1.4.5
 
 ## History
+- 1.5.23.5
+  - Added support for windows. So far it wasn't tested by me so I didn't know if it really works. Now I tested it and added fixes. Shared libs mode works perfectly, static linking has one issue wich I can't solve for now. I had to disable Drag&Drop to make it work. If you need it then you must switch to shared libs mode.
+  - Fixed wrong descendants 
+  - Added dedicated `Fl_Grid_Align` enum for TFL_Grid.Align. So far `Fl_Align` was used as replacement
+  - Code refactor for static linking fixes. Moved everything into one `static_patches.pas`
+  - Updated README sections for static and dynamic linking, added also section for building CFLTK on Windows
 - 1.5.23.4: Finally fixed static linking issues and make it as default instead of shared libs
 - 1.5.23.3: Experimental static linking
 - 1.5.23.2: New demos
 - 1.5.23.1: First version
 
 ## Tested platforms
-- Linux CachyOS (arch)
-- I need help to someone test it also on macos and windows
+- Linux CachyOS KDE (arch), Xubuntu XFCE
+- Windows 10
+- I need help to someone test it also on macos
 
-## Building CFLTK and FLTK libs (linux)
-You need to get FLTK and CFLTK sources first and build them. Depending on whether you want to make your app as statically linking libs (libcfltk.a, libfltk.a, etc) whis is default or use shared library (PasFLT `-dUSE_FLTK_SHARED_LIBS` option), you need to build CFLTK and FLTK with `-DFLTK_BUILD_SHARED_LIBS` and `-DCFLTK_BUILD_SHARED` set to `ON` or `OFF`:
-- Static linking (default from version 1.5.23.4): Your executable will contain all necessary C / C++ code. You don't need to deploy any libraries related to CFLTK / FLTK, only OS / platform. This will produce larger executable file but in summary it is smaller than prividing shared libs because linker use only necessary objects from *.a libs
+## Tested toolchains
+- Linux gcc (GCC) 16.1.1 20260625 64bit
+- Windows msys2 MinGW64 GCC 16.1.0-5 64bit
+
+## Building CFLTK and FLTK libs (Linux)
+You need to get FLTK and CFLTK sources first and build them. Depending on whether you want to make your app as statically linking libs (libcfltk.a, libfltk.a, etc) whis is default (but still experimental) or use shared library (PasFLT `-dUSE_FLTK_SHARED_LIBS` option), you need to build CFLTK and FLTK with `-DFLTK_BUILD_SHARED_LIBS` and `-DCFLTK_BUILD_SHARED` set to `ON` or `OFF`:
+- Static linking (default from version 1.5.23.4): Your executable will contain all necessary C / C++ code. You don't need to deploy any libraries related to CFLTK / FLTK, only OS / platform. This will produce larger executable file but in summary it is smaller than prividing shared libs because linker use only necessary objects from *.a libs. This mode is still experimental and I'm still fixing linking issues. On `Linux` everything should works fine. On `Windows` there is issue with linking `ole32.a` - there is not solved yet Access Violation in Drag&Drop functionality so I had to disable it for time beeing. If you need Drag&Drop in your app then you must switch to shared libs mode.
+For static linking you need also set `-Xe` param for Free Pascal compiler, otherwise you may get error `Failed reading coff file, invalid section index while reading libcfltk.a(cfl_window.cpp.obj)`. You can set it in compiler options in your Lazarus project options or pass to FPC compiler command.
 - Shared linking. Your executable will be smaller but you need to deploy CFLT / FLTK libraries with your app (libcfltk.so, lifltk.so / cfltk.dll, fltk.dll). See "Deploying your app" section for more info.
+For shared linking I recommend also set options `-DCFLTK_MSVC_CRT_STATIC=ON` and `set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -static -static-libgcc -static-libstdc++")` in `CMakeLists.txt` when building CFLTK so you don't need deploy `libstdc++-6.dll`, `libwinpthread-1.dll` and `libgcc_s_seh-1.dll` with your app, only one `cfltk.dll`
 
 Prepare CFLTK and FLTK:
 1. Extract CFLTK to some directory, for example "cfltk". 
@@ -89,6 +102,14 @@ cmake -B bin -S . \
 cmake --build bin --parallel
 ```
 5. This will produce series of *.a libs or in case of shared libs - one single libcfltk.so / cfltk.dll library containing CFLTK and also FLTK source. In shared libs mode you don't need separated libfltk.so, libfltk_images.so, libfltk_forms.so etc. Everything your app need will be in one libcfltk.so / cfltk.dll. You can find libcfltk.a / libcflt.so/dll in "cfltk/bin" directory and FLTK *.a libs in "cfltk/bin/fltk/lib" directory.
+
+## Building CFLTK and FLTK libs (Windows)
+On windows, steps are very similar to Linux one so read section above. For build toolchain I recommend MSYS2 from [www.msys2.org](www.msys2.org) where you get GCC compiler, CMake and all what you need. 
+- Install MSYS2
+- Run `mingw64.exe` from your install directory (for example C:\msys64\mingw64.exe)
+- When console open, make sure that you have neccessary tools, run `pacman -S mingw-w64-x86_64-binutils`
+- In opened console mode go to CFLTK directory by `cd <path to CFLTK>`
+- Use `cmake` command described in `Building CFLTK and FLTK libs (Linux)`
 
 ## Building project using PasFLTK
 ### Using Lazarus
@@ -162,6 +183,7 @@ Go to your project or demo dir and run this command. It expect that *.a / libcfl
 -FUlib/x86_64-linux
 -FE.
 -ohello
+-Xe <---- required for static linking
 hello.lpr
 
 ```

@@ -57,17 +57,17 @@ uses
 (* === Added / Modified by cfltk2pas === *)
 type
   PFl_Help_View = ^Fl_Help_View;
-  PFl_Clock = ^Fl_Clock;
   PFl_Input_Choice = ^Fl_Input_Choice;
-  PFl_Spinner = ^Fl_Spinner;
   PFl_Chart = ^Fl_Chart;
+  PFl_Spinner = ^Fl_Spinner;
+  PFl_Clock = ^Fl_Clock;
   PFl_Progress = ^Fl_Progress;
-  Fl_Chart = widget;
-  Fl_Progress = widget;
-  Fl_Help_View = widget;
-  Fl_Input_Choice = widget;
-  Fl_Spinner = widget;
-  Fl_Clock = widget;
+  Fl_Progress = Fl_Widget;
+  Fl_Help_View = Fl_Widget;
+  Fl_Input_Choice = Fl_Widget;
+  Fl_Spinner = Fl_Widget;
+  Fl_Clock = Fl_Widget;
+  Fl_Chart = Fl_Widget;
 (* ====== *)
 
   function Fl_Spinner_new(x:longint; y:longint; width:longint; height:longint; title:Pchar):Pwidget;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Spinner_new';

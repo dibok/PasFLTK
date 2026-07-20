@@ -56,18 +56,18 @@ interface
 type
   PFl_Widget = ^Fl_Widget;
   Fl_Widget = record end;
-  Fl_ArgCallback1 = function (ev:longint):longint;cdecl;
-  Fl_ArgCallback8 = function (_para1:dword; _para2:dword; _para3:longint; _para4:longint):dword;cdecl;
   Fl_ArgCallback7 = procedure (_para1:Pchar);cdecl;
-  Fl_Widget_ArgCallback1 = procedure (_para1:PFl_Widget; x:longint; y:longint; w:longint; h:longint;_para6:pointer);cdecl;
   Fl_ArgCallback6 = procedure (source:longint; data:pointer);cdecl;
-  Fl_ArgCallback2 = procedure (_para1:pointer);cdecl;
-  Fl_ArgCallback3 = function (event:longint; _para2:pointer):longint;cdecl;
-  Fl_Widget_ArgCallback2 = procedure (_para1:PFl_Widget; _para2:pointer);cdecl;
-  custom_draw_callback = procedure (_para1:PFl_Widget; _para2:pointer);cdecl;
-  Fl_ArgCallback4 = procedure (_para1:longint; _para2:longint; _para3:longint; _para4:longint; _para5:dword);cdecl;
-  custom_handler_callback = function (_para1:PFl_Widget; _para2:longint; _para3:pointer):longint;cdecl;
   Fl_ArgCallback5 = function (_para1:pointer; _para2:pointer):longint;cdecl;
+  Fl_Widget_ArgCallback1 = procedure (_para1:PFl_Widget; x:longint; y:longint; w:longint; h:longint;_para6:pointer);cdecl;
+  Fl_Widget_ArgCallback2 = procedure (_para1:PFl_Widget; _para2:pointer);cdecl;
+  Fl_ArgCallback8 = function (_para1:dword; _para2:dword; _para3:longint; _para4:longint):dword;cdecl;
+  Fl_ArgCallback1 = function (ev:longint):longint;cdecl;
+  custom_draw_callback = procedure (_para1:PFl_Widget; _para2:pointer);cdecl;
+  custom_handler_callback = function (_para1:PFl_Widget; _para2:longint; _para3:pointer):longint;cdecl;
+  Fl_ArgCallback4 = procedure (_para1:longint; _para2:longint; _para3:longint; _para4:longint; _para5:dword);cdecl;
+  Fl_ArgCallback3 = function (event:longint; _para2:pointer):longint;cdecl;
+  Fl_ArgCallback2 = procedure (_para1:pointer);cdecl;
 (* ====== *)
 
 implementation

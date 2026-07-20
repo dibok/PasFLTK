@@ -25,6 +25,7 @@ unit cfl;
 interface
 (* === Added / Modified by cfltk2pas === *)
 uses 
+  {$IFNDEF USE_FLTK_SHARED_LIBS}static_patches, {$ENDIF}
   cfl_macros;
 (* ====== *)
 
@@ -73,9 +74,32 @@ uses
       {$LINKLIB cairo}
       {$LINKLIB pangocairo-1.0}
     {$ENDIF}
-    {$LINKLIB dl}
-    {$LINKLIB m}
-    {$LINKLIB stdc++}
+    {$IFDEF LINUX}
+      {$LINKLIB dl}
+      {$LINKLIB m}
+      {$LINKLIB stdc++}
+    {$ENDIF}
+    {$IFDEF WINDOWS}
+      {$linklib stdc++}
+      {$linklib pthread}
+      //{$linklib msvcrt}
+      {$linklib mingwex}
+      {$linklib gcc}
+      {$linklib gcc_eh}
+      {$linklib ucrtbase}
+      {$linklib kernel32}
+      {$linklib user32}
+      {$linklib gdiplus}
+      {$linklib gdi32}
+      {$linklib ws2_32}
+      {$linklib winspool}
+      {$linklib ole32}
+      {$linklib shell32}
+      {$linklib uuid}
+      {$linklib comdlg32}
+      {$linklib comctl32}
+    {$ENDIF}
+
   {$ENDIF}
 const
   cPASFLTK_VER = '1.5.23.4';
@@ -90,10 +114,8 @@ const
 
 (* === Added / Modified by cfltk2pas === *)
 type
-  Psingle = ^single;
-  PPlongint = ^Plongint;
+  PFl_Widget = cfl_macros.PFl_Widget;
   PFl_Widget_Tracker = ^Fl_Widget_Tracker;
-  PFl_Widget = ^Fl_Widget;
   Fl_Widget_Tracker = record end;
   Fl_Widget = cfl_macros.Fl_Widget;
   Fl_Awake_Handler = procedure (data:pointer);cdecl;
@@ -482,44 +504,5 @@ type
 {$endif}
 
 implementation
-(* === Added / Modified by cfltk2pas === *)
-// Fix for static linking and C++ constructors not beeing initialized
-// See demo /test/static_error_to_solve which explain more
-{$IFNDEF USE_FLTK_SHARED_LIBS}
-{$IFDEF LINUX}
-type
-  TCtorProc = procedure(); cdecl;
-  PCtorProc = ^TCtorProc;
-
-var
-  __init_array_start: Byte; external name '__init_array_start';
-  __init_array_end: Byte; external name '__init_array_end';
-
-procedure RunCppGlobalConstructors;
-var
-  p, pend: PCtorProc;
-begin
-  p := PCtorProc(@__init_array_start);
-  pend := PCtorProc(@__init_array_end);
-  while p < pend do
-  begin
-    if Assigned(p^) then
-      p^();
-    Inc(p);
-  end;
-end;
-{$ENDIF}
-{$ENDIF}
-(* ====== *)
-
-
-(* === Added / Modified by cfltk2pas === *)
-initialization
-  {$IFNDEF USE_FLTK_SHARED_LIBS}
-  {$IFDEF LINUX}
-  RunCppGlobalConstructors;
-  {$ENDIF}
-  {$ENDIF}
-(* ====== *)
 
 end.

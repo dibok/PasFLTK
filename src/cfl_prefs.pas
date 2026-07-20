@@ -52,7 +52,6 @@ interface
 
 (* === Added / Modified by cfltk2pas === *)
 type
-  Psingle = ^single;
   PFl_Preferences = ^Fl_Preferences;
   Fl_Preferences = record end;
 (* ====== *)

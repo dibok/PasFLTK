@@ -3,7 +3,7 @@ unit cfl_enums;
 interface
 
 {
-  Automatically converted by H2Pas 1.0.0 from /home/dibo/praca/projects/PasFLTK/converter/include/out/cfl_enums.h
+  Automatically converted by H2Pas 1.0.0 from include/out/cfl_enums.h
   The following command line parameters were used:
     -d
     -D
@@ -13,8 +13,8 @@ interface
     -l
     libcfltk
     -o
-    /home/dibo/praca/projects/PasFLTK/src/cfl_enums.pas
-    /home/dibo/praca/projects/PasFLTK/converter/include/out/cfl_enums.h
+    PasFLTK/src/cfl_enums.pas
+    include/out/cfl_enums.h
 }
 
   const
@@ -758,6 +758,30 @@ Fl_EventNames : array of Pchar =  (
     'Fl_Event_ZoomEvent',
     'Fl_Event_Resize'
 );
+type
+  Fl_Grid_Align = LongInt;
+
+const
+  FL_GRID_LEFT          = $0004; // Align the widget at the left side of the cell.
+  FL_GRID_RIGHT         = $0008; // Align the widget at the right side of the cell.
+  FL_GRID_BOTTOM        = $0002; // Align the widget at the bottom of the cell.
+  FL_GRID_BOTTOM_LEFT   = FL_GRID_BOTTOM or FL_GRID_LEFT;
+  FL_GRID_BOTTOM_RIGHT  = FL_GRID_BOTTOM or FL_GRID_RIGHT;
+
+  FL_GRID_CENTER        = $0000; // Align the widget in the middle of the cell (default).
+
+  FL_GRID_FILL          = $0030; // Stretch the widget in both directions to fill the cell.
+  FL_GRID_HORIZONTAL    = $0010; // Stretch the widget horizontally to fill the cell.
+
+
+  FL_GRID_PROPORTIONAL  = $0040; // Stretch the widget proportionally.
+
+
+  FL_GRID_TOP           = $0001; // Align the widget at the top of the cell.
+  FL_GRID_TOP_LEFT      = FL_GRID_TOP or FL_GRID_LEFT;
+  FL_GRID_TOP_RIGHT     = FL_GRID_TOP or FL_GRID_RIGHT;
+
+  FL_GRID_VERTICAL      = $0020; // Stretch the widget vertically to fill the cell.
 (* ====== *)
 
 {$endif}

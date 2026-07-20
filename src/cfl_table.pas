@@ -56,12 +56,12 @@ uses
 
 (* === Added / Modified by cfltk2pas === *)
 type
+  PFl_Table_Row = ^Fl_Table_Row;
   Ptable = ^table;
   PFl_Table = ^Fl_Table;
-  PFl_Table_Row = ^Fl_Table_Row;
   table = record end;
-  Fl_Table_Row = widget;
-  Fl_Table = widget;
+  Fl_Table_Row = Fl_Widget;
+  Fl_Table = Fl_Widget;
   Fl_Table_ArgCallback1 = procedure (_para1:PFl_Widget; _para2:longint; _para3:longint; _para4:longint; _para5:longint;_para6:longint; _para7:longint; _para8:longint; _para9:pointer);cdecl;
 (* ====== *)
 

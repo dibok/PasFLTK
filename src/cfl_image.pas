@@ -52,38 +52,38 @@ interface
 
 (* === Added / Modified by cfltk2pas === *)
 type
-  PFl_Shared_Image = ^Fl_Shared_Image;
-  PFl_GIF_Image = ^Fl_GIF_Image;
-  PFl_RGB_Image = ^Fl_RGB_Image;
-  PFl_SVG_Image = ^Fl_SVG_Image;
-  PFl_PNG_Image = ^Fl_PNG_Image;
-  PFl_ICO_Image = ^Fl_ICO_Image;
-  PFl_PNM_Image = ^Fl_PNM_Image;
-  PFl_XPM_Image = ^Fl_XPM_Image;
-  PFl_Anim_GIF_Image = ^Fl_Anim_GIF_Image;
-  PFl_Image = ^Fl_Image;
-  PFl_Pixmap = ^Fl_Pixmap;
-  PFl_Tiled_Image = ^Fl_Tiled_Image;
   PFl_XBM_Image = ^Fl_XBM_Image;
+  PFl_PNM_Image = ^Fl_PNM_Image;
+  PFl_Pixmap = ^Fl_Pixmap;
+  PFl_XPM_Image = ^Fl_XPM_Image;
+  PFl_Shared_Image = ^Fl_Shared_Image;
+  PFl_ICO_Image = ^Fl_ICO_Image;
+  PFl_Tiled_Image = ^Fl_Tiled_Image;
+  PFl_RGB_Image = ^Fl_RGB_Image;
   PFl_JPEG_Image = ^Fl_JPEG_Image;
-  PFl_BMP_Image = ^Fl_BMP_Image;
+  PFl_PNG_Image = ^Fl_PNG_Image;
   Pimage = ^image;
+  PFl_Image = ^Fl_Image;
+  PFl_GIF_Image = ^Fl_GIF_Image;
+  PFl_Anim_GIF_Image = ^Fl_Anim_GIF_Image;
+  PFl_SVG_Image = ^Fl_SVG_Image;
+  PFl_BMP_Image = ^Fl_BMP_Image;
   image = record end;
-  Fl_BMP_Image = image;
-  Fl_Tiled_Image = image;
-  Fl_JPEG_Image = image;
-  Fl_XBM_Image = image;
-  Fl_XPM_Image = image;
-  Fl_Pixmap = image;
   Fl_Image = image;
-  Fl_GIF_Image = image;
-  Fl_ICO_Image = image;
-  Fl_PNM_Image = image;
-  Fl_Anim_GIF_Image = image;
-  Fl_PNG_Image = image;
-  Fl_Shared_Image = image;
-  Fl_SVG_Image = image;
-  Fl_RGB_Image = image;
+  Fl_Tiled_Image = Fl_Image;
+  Fl_PNM_Image = Fl_Image;
+  Fl_XBM_Image = Fl_Image;
+  Fl_ICO_Image = Fl_Image;
+  Fl_Shared_Image = Fl_Image;
+  Fl_RGB_Image = Fl_Image;
+  Fl_XPM_Image = Fl_Image;
+  Fl_SVG_Image = Fl_Image;
+  Fl_PNG_Image = Fl_Image;
+  Fl_JPEG_Image = Fl_Image;
+  Fl_BMP_Image = Fl_Image;
+  Fl_Pixmap = Fl_Image;
+  Fl_Anim_GIF_Image = Fl_Image;
+  Fl_GIF_Image = Fl_Image;
 (* ====== *)
 
   procedure Fl_Image_draw(_para1:Pimage; _X:longint; _Y:longint; _W:longint; _H:longint);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Image_draw';

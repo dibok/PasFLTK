@@ -58,16 +58,16 @@ uses
 type
   PFl_Multi_Browser = ^Fl_Multi_Browser;
   PFl_File_Browser = ^Fl_File_Browser;
+  PFl_Check_Browser = ^Fl_Check_Browser;
+  PFl_Browser = ^Fl_Browser;
   PFl_Hold_Browser = ^Fl_Hold_Browser;
   PFl_Select_Browser = ^Fl_Select_Browser;
-  PFl_Browser = ^Fl_Browser;
-  PFl_Check_Browser = ^Fl_Check_Browser;
-  Fl_Select_Browser = widget;
-  Fl_Multi_Browser = widget;
-  Fl_Hold_Browser = widget;
-  Fl_Browser = widget;
-  Fl_Check_Browser = widget;
-  Fl_File_Browser = widget;
+  Fl_Multi_Browser = Fl_Widget;
+  Fl_File_Browser = Fl_Widget;
+  Fl_Check_Browser = Fl_Widget;
+  Fl_Browser = Fl_Widget;
+  Fl_Hold_Browser = Fl_Widget;
+  Fl_Select_Browser = Fl_Widget;
 (* ====== *)
 
   function Fl_Browser_new(x:longint; y:longint; width:longint; height:longint; title:Pchar):Pwidget;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Browser_new';

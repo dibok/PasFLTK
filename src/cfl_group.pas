@@ -56,26 +56,26 @@ uses
 
 (* === Added / Modified by cfltk2pas === *)
 type
-  PFl_Flex = ^Fl_Flex;
-  PFl_Pack = ^Fl_Pack;
-  PFl_Color_Chooser = ^Fl_Color_Chooser;
-  PFl_Tabs = ^Fl_Tabs;
-  PFl_Tile = ^Fl_Tile;
-  PFl_Scroll = ^Fl_Scroll;
-  PFl_Grid = ^Fl_Grid;
-  PFl_Group = ^Fl_Group;
-  PFl_Overlay_Group = ^Fl_Overlay_Group;
   PFl_Wizard = ^Fl_Wizard;
-  Fl_Tabs = widget;
-  Fl_Group = widget;
-  Fl_Tile = widget;
-  Fl_Grid = widget;
-  Fl_Color_Chooser = widget;
-  Fl_Flex = widget;
-  Fl_Pack = widget;
-  Fl_Wizard = widget;
-  Fl_Scroll = widget;
-  Fl_Overlay_Group = widget;
+  PFl_Tile = ^Fl_Tile;
+  PFl_Color_Chooser = ^Fl_Color_Chooser;
+  PFl_Grid = ^Fl_Grid;
+  PFl_Flex = ^Fl_Flex;
+  PFl_Overlay_Group = ^Fl_Overlay_Group;
+  PFl_Group = ^Fl_Group;
+  PFl_Pack = ^Fl_Pack;
+  PFl_Tabs = ^Fl_Tabs;
+  PFl_Scroll = ^Fl_Scroll;
+  Fl_Wizard = Fl_Widget;
+  Fl_Tile = Fl_Widget;
+  Fl_Color_Chooser = Fl_Widget;
+  Fl_Grid = Fl_Widget;
+  Fl_Flex = Fl_Widget;
+  Fl_Overlay_Group = Fl_Widget;
+  Fl_Group = Fl_Widget;
+  Fl_Pack = Fl_Widget;
+  Fl_Tabs = Fl_Widget;
+  Fl_Scroll = Fl_Widget;
 (* ====== *)
 
   function Fl_Group_new(x:longint; y:longint; width:longint; height:longint; title:Pchar):Pwidget;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Group_new';

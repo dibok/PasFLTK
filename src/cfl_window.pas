@@ -57,19 +57,19 @@ uses
 (* === Added / Modified by cfltk2pas === *)
 type
   PFl_Overlay_Window = ^Fl_Overlay_Window;
-  PFl_Double_Window = ^Fl_Double_Window;
-  PFl_Glut_Window = ^Fl_Glut_Window;
-  PFl_Single_Window = ^Fl_Single_Window;
   PFl_Gl_Window = ^Fl_Gl_Window;
+  PFl_Glut_Window = ^Fl_Glut_Window;
   PFl_Menu_Window = ^Fl_Menu_Window;
   PFl_Window = ^Fl_Window;
-  Fl_Double_Window = widget;
-  Fl_Gl_Window = widget;
-  Fl_Menu_Window = widget;
-  Fl_Overlay_Window = widget;
-  Fl_Single_Window = widget;
-  Fl_Glut_Window = widget;
-  Fl_Window = widget;
+  PFl_Single_Window = ^Fl_Single_Window;
+  PFl_Double_Window = ^Fl_Double_Window;
+  Fl_Overlay_Window = Fl_Widget;
+  Fl_Gl_Window = Fl_Widget;
+  Fl_Glut_Window = Fl_Widget;
+  Fl_Menu_Window = Fl_Widget;
+  Fl_Window = Fl_Widget;
+  Fl_Single_Window = Fl_Widget;
+  Fl_Double_Window = Fl_Widget;
 (* ====== *)
 
   function Fl_Window_new(x:longint; y:longint; width:longint; height:longint; title:Pchar):Pwidget;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Window_new';

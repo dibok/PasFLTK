@@ -56,28 +56,28 @@ uses
 
 (* === Added / Modified by cfltk2pas === *)
 type
-  PFl_Button = ^Fl_Button;
+  PFl_Light_Button = ^Fl_Light_Button;
+  PFl_Radio_Light_Button = ^Fl_Radio_Light_Button;
   PFl_Repeat_Button = ^Fl_Repeat_Button;
   PFl_Shortcut_Button = ^Fl_Shortcut_Button;
-  PFl_Check_Button = ^Fl_Check_Button;
-  PFl_Light_Button = ^Fl_Light_Button;
-  PFl_Toggle_Button = ^Fl_Toggle_Button;
-  PFl_Radio_Light_Button = ^Fl_Radio_Light_Button;
   PFl_Return_Button = ^Fl_Return_Button;
-  PFl_Radio_Button = ^Fl_Radio_Button;
   PFl_Radio_Round_Button = ^Fl_Radio_Round_Button;
+  PFl_Check_Button = ^Fl_Check_Button;
+  PFl_Button = ^Fl_Button;
+  PFl_Radio_Button = ^Fl_Radio_Button;
   PFl_Round_Button = ^Fl_Round_Button;
-  Fl_Round_Button = widget;
-  Fl_Button = widget;
-  Fl_Radio_Button = widget;
-  Fl_Light_Button = widget;
-  Fl_Repeat_Button = widget;
-  Fl_Check_Button = widget;
-  Fl_Toggle_Button = widget;
-  Fl_Radio_Light_Button = widget;
-  Fl_Return_Button = widget;
-  Fl_Radio_Round_Button = widget;
-  Fl_Shortcut_Button = widget;
+  PFl_Toggle_Button = ^Fl_Toggle_Button;
+  Fl_Light_Button = Fl_Widget;
+  Fl_Radio_Light_Button = Fl_Widget;
+  Fl_Repeat_Button = Fl_Widget;
+  Fl_Shortcut_Button = Fl_Widget;
+  Fl_Return_Button = Fl_Widget;
+  Fl_Radio_Round_Button = Fl_Widget;
+  Fl_Check_Button = Fl_Widget;
+  Fl_Button = Fl_Widget;
+  Fl_Radio_Button = Fl_Widget;
+  Fl_Round_Button = Fl_Widget;
+  Fl_Toggle_Button = Fl_Widget;
 (* ====== *)
 
   function Fl_Button_new(x:longint; y:longint; width:longint; height:longint; title:Pchar):Pwidget;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Button_new';

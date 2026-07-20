@@ -53,11 +53,11 @@ interface
 (* === Added / Modified by cfltk2pas === *)
 type
   PFl_File_Chooser = ^Fl_File_Chooser;
-  PFl_Native_File_Chooser = ^Fl_Native_File_Chooser;
   PFl_Help_Dialog = ^Fl_Help_Dialog;
-  Fl_File_Chooser = record end;
-  Fl_Native_File_Chooser = record end;
+  PFl_Native_File_Chooser = ^Fl_Native_File_Chooser;
   Fl_Help_Dialog = record end;
+  Fl_Native_File_Chooser = record end;
+  Fl_File_Chooser = record end;
   Fl_Dialog_ArgCallback1 = procedure (_para1:PFl_File_Chooser; _para2:pointer);cdecl;
 (* ====== *)
 

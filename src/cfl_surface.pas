@@ -52,12 +52,12 @@ interface
 
 (* === Added / Modified by cfltk2pas === *)
 type
+  PFl_SVG_File_Surface = ^Fl_SVG_File_Surface;
   PFl_Image_Surface = ^Fl_Image_Surface;
   PFl_Surface_Device = ^Fl_Surface_Device;
-  PFl_SVG_File_Surface = ^Fl_SVG_File_Surface;
   Fl_Image_Surface = record end;
   Fl_Surface_Device = record end;
-  Fl_SVG_File_Surface = record end;
+  Fl_SVG_File_Surface = Fl_Surface_Device;
 (* ====== *)
 
   procedure Fl_Surface_Device_set_current(self: PFl_Surface_Device);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Surface_Device_set_current';

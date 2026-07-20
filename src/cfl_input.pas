@@ -56,22 +56,22 @@ uses
 
 (* === Added / Modified by cfltk2pas === *)
 type
-  PFl_Multiline_Input = ^Fl_Multiline_Input;
-  PFl_Input = ^Fl_Input;
   PFl_File_Input = ^Fl_File_Input;
+  PFl_Secret_Input = ^Fl_Secret_Input;
   PFl_Multiline_Output = ^Fl_Multiline_Output;
   PFl_Output = ^Fl_Output;
-  PFl_Secret_Input = ^Fl_Secret_Input;
-  PFl_Float_Input = ^Fl_Float_Input;
   PFl_Int_Input = ^Fl_Int_Input;
-  Fl_Multiline_Output = widget;
-  Fl_Secret_Input = widget;
-  Fl_Float_Input = widget;
-  Fl_Int_Input = widget;
-  Fl_Multiline_Input = widget;
-  Fl_Output = widget;
-  Fl_Input = widget;
-  Fl_File_Input = widget;
+  PFl_Input = ^Fl_Input;
+  PFl_Multiline_Input = ^Fl_Multiline_Input;
+  PFl_Float_Input = ^Fl_Float_Input;
+  Fl_File_Input = Fl_Widget;
+  Fl_Secret_Input = Fl_Widget;
+  Fl_Multiline_Output = Fl_Widget;
+  Fl_Output = Fl_Widget;
+  Fl_Int_Input = Fl_Widget;
+  Fl_Input = Fl_Widget;
+  Fl_Multiline_Input = Fl_Widget;
+  Fl_Float_Input = Fl_Widget;
 (* ====== *)
 
   function Fl_Input_new(x:longint; y:longint; width:longint; height:longint; title:Pchar):Pwidget;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Input_new';

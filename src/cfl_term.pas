@@ -57,11 +57,11 @@ uses
 (* === Added / Modified by cfltk2pas === *)
 type
   PFl_Terminal_Utf8Char = ^Fl_Terminal_Utf8Char;
-  PFl_Terminal = ^Fl_Terminal;
   PFl_Terminal_Scrollbar = ^Fl_Terminal_Scrollbar;
-  Fl_Terminal_Utf8Char = pointer;
-  Fl_Terminal = widget;
+  PFl_Terminal = ^Fl_Terminal;
+  Fl_Terminal_Utf8Char = record end;
   Fl_Terminal_Scrollbar = pointer;
+  Fl_Terminal = Fl_Widget;
 (* ====== *)
 
   function Fl_Terminal_new(x:longint; y:longint; width:longint; height:longint; title:Pchar):Pwidget;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_Terminal_new';

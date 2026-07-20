@@ -56,13 +56,13 @@ uses
 
 (* === Added / Modified by cfltk2pas === *)
 type
-  PFl_Tree_Item = ^Fl_Tree_Item;
-  PFl_Tree_Item_Array = ^Fl_Tree_Item_Array;
   PPFl_Tree_Item_Array = ^PFl_Tree_Item_Array;
+  PFl_Tree_Item_Array = ^Fl_Tree_Item_Array;
   PFl_Tree = ^Fl_Tree;
+  PFl_Tree_Item = ^Fl_Tree_Item;
   Fl_Tree_Item = record end;
   Fl_Tree_Item_Array = record end;
-  Fl_Tree = widget;
+  Fl_Tree = Fl_Widget;
   Fl_Tree_ArgCallback1 = function (self: PFl_Tree_Item; _para2:longint; _para3:pointer):longint;cdecl;
 (* ====== *)
 
