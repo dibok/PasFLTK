@@ -74,7 +74,8 @@ You need to get FLTK and CFLTK sources first and build them. Depending on whethe
 - Static linking (default from version 1.5.23.4): Your executable will contain all necessary C / C++ code. You don't need to deploy any libraries related to CFLTK / FLTK, only OS / platform. This will produce larger executable file but in summary it is smaller than prividing shared libs because linker use only necessary objects from *.a libs. This mode is still experimental and I'm still fixing linking issues. On `Linux` everything should works fine. On `Windows` there is issue with linking `ole32.a` - there is not solved yet Access Violation in Drag&Drop functionality so I had to disable it for time beeing. If you need Drag&Drop in your app then you must switch to shared libs mode.
 For static linking you need also set `-Xe` param for Free Pascal compiler, otherwise you may get error `Failed reading coff file, invalid section index while reading libcfltk.a(cfl_window.cpp.obj)`. You can set it in compiler options in your Lazarus project options or pass to FPC compiler command.
 - Shared linking. Your executable will be smaller but you need to deploy CFLT / FLTK libraries with your app (libcfltk.so, lifltk.so / cfltk.dll, fltk.dll). See "Deploying your app" section for more info.
-For shared linking I recommend also set options `-DCFLTK_MSVC_CRT_STATIC=ON` and `set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -static -static-libgcc -static-libstdc++")` in `CMakeLists.txt` when building CFLTK so you don't need deploy `libstdc++-6.dll`, `libwinpthread-1.dll` and `libgcc_s_seh-1.dll` with your app, only one `cfltk.dll`
+For shared linking I recommend also set options `-DCFLTK_MSVC_CRT_STATIC=ON` and `set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -static -static-libgcc -static-libstdc++")` in `CMakeLists.txt` when building CFLTK so you don't need deploy `libstdc++-6.dll`, `libwinpthread-1.dll` and `libgcc_s_seh-1.dll` with your app, only one `cfltk.dll`.
+Another thing for static linking. On Windows you may notce compiler error `Dwarf Error: found dwarf version '5', this reader only handles version 2, 3 and 4 information`. Free Pascal doesn't support version 5 for debug symbols. In this case you need to strip MinGW *.a files with `--strip-debug`. Look at `Building CFLTK and FLTK libs` for more info.
 
 Prepare CFLTK and FLTK:
 1. Extract CFLTK to some directory, for example "cfltk". 
@@ -110,6 +111,10 @@ On windows, steps are very similar to Linux one so read section above. For build
 - When console open, make sure that you have neccessary tools, run `pacman -S mingw-w64-x86_64-binutils`
 - In opened console mode go to CFLTK directory by `cd <path to CFLTK>`
 - Use `cmake` command described in `Building CFLTK and FLTK libs (Linux)`
+- In case if you get DWARF errors while compiling your project then you need strip MinGW libs. To do so:
+  - `cd C:\msys64\mingw64\lib`
+  - Run command `strip --strip-debug *.a`
+  - Repeat the same for C:\msys64\mingw64\lib\gcc\x86_64-w64-mingw32\16.1.0 directory
 
 ## Building project using PasFLTK
 ### Using Lazarus
@@ -158,7 +163,7 @@ begin
 end.  
 ```
 
-In lazarus `Project->Project options`. Go to `Compiler options -> Paths` and add path to PasFLTK source (-Fu) and your *.a / libcfltk.so / cfltk.dll libraries (-Fl). If you are using shared libs, then you need to set `-dUSE_FLTK_SHARED_LIBS` in your `Project->Project options -> Compiler options -> Other options` or in commandline.
+In lazarus `Project->Project options`. Go to `Compiler options -> Paths` and add path to PasFLTK source (-Fu) and your *.a / libcfltk.so / cfltk.dll libraries (-Fl). In case of static linking, you also need to add path to GCC lib (e.g. /usr/lib/gcc/x86_64-pc-linux-gnu/16 on linux or C:\msys64\mingw64\lib and C:\msys64\mingw64\lib\gcc\x86_64-w64-mingw32\16.1.0 on windows). If you are using shared libs, then you need to set `-dUSE_FLTK_SHARED_LIBS` in your `Project->Project options -> Compiler options -> Other options` or in commandline.
 On linux, in case of static linking, you need to also add path (-Fl) to `libgcc` which in most cases is in `/usr/lib/gcc/x86_64-pc-linux-gnu/16.1.1/`. Otherwise you may get linking errors about missing `crtbeginS.o` and `crtendS.o`. If you are using commandline to compile your project then you can set it by adding `-Fl/usr/lib/gcc/x86_64-pc-linux-gnu/16.1.1`.
 
 Now you can build your project.
