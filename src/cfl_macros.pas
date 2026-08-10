@@ -66,6 +66,7 @@ type
   custom_draw_callback = procedure (_para1:PFl_Widget; _para2:pointer);cdecl;
   custom_handler_callback = function (_para1:PFl_Widget; _para2:longint; _para3:pointer):longint;cdecl;
   Fl_ArgCallback4 = procedure (_para1:longint; _para2:longint; _para3:longint; _para4:longint; _para5:dword);cdecl;
+  Fl_ArgCallback9 = procedure (_para1:longint; _para2:longint; _para3:longint; _para4:longint; _para5:longint; _para6:dword; _para7:dword);cdecl;
   Fl_ArgCallback3 = function (event:longint; _para2:pointer):longint;cdecl;
   Fl_ArgCallback2 = procedure (_para1:pointer);cdecl;
 (* ====== *)

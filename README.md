@@ -33,22 +33,37 @@ Even though FLTK does not require GTK, it can optionally use Cairo and Pango whe
 
 [CFLTK repository](https://github.com/MoAlyousef/cfltk)
 
-## Screenshot of "scheme" example (examples/scheme/scheme.lpr)
+## Screenshots
+
+### "Scheme" example (examples/scheme/scheme.lpr)
 
 <p align="center">
   <img src="examples/scheme/screen.png">
 </p>
 
-## Versioning
-Version number is synchronized with CFLTK version. So "1.5.23.5" mean that binding was made on CFLTK version 1.5.23. The last part "5" is actualy PasFLTK version which will be increased in case of bug fixes / missing features
+### "Fusion style" example (examples/fusion_style_demo/fusion_style_demo.lpr)
 
-Version: 1.5.23.5
+This is a PasFLTK theme written in Free Pascal that tries to imitate native system look and colors
+
+| Windows Dark  | Windows Light  | Kubuntu Dark | Kubuntu Light | Ubuntu Dark | Ubuntu Light |
+| :------: | :------: | :----------: | :-----------: | :-------------: | :--------------: |
+| <a href="examples/fusion_style_demo/fusion_win_dark.png"><img src="examples/fusion_style_demo/fusion_win_dark.png" alt="Screen Windows Dark" width="50%"></a> | <a href="examples/fusion_style_demo/fusion_win_light.png"><img src="examples/fusion_style_demo/fusion_win_light.png" alt="Screen Windows Light" width="50%"></a> | <a href="examples/fusion_style_demo/fusion_kde_dark.png"><img src="examples/fusion_style_demo/fusion_kde_dark.png" alt="Screen Kubuntu Dark" width="50%"></a>  |  <a href="examples/fusion_style_demo/fusion_kde_light.png"><img src="examples/fusion_style_demo/fusion_kde_light.png" alt="Screen Kubuntu Light" width="50%"></a>  |  <a href="examples/fusion_style_demo/fusion_ubuntu_dark.png"><img src="examples/fusion_style_demo/fusion_ubuntu_dark.png" alt="Screen Ubunti Dark" width="50%"></a>  |  <a href="examples/fusion_style_demo/fusion_ubuntu_light.png"><img src="examples/fusion_style_demo/fusion_ubuntu_light.png" alt="Screen Ubuntu Light" width="50%"></a>  |
+| <a href="examples/fusion_style_demo/fusion_win_dark.png">(click to enlarge)</a>  | <a href="examples/fusion_style_demo/fusion_win_light.png">(click to enlarge)</a>  | <a href="examples/fusion_style_demo/fusion_kde_dark.png">(click to enlarge)</a>  |  <a href="examples/fusion_style_demo/fusion_kde_light.png">(click to enlarge)</a>  |  <a href="examples/fusion_style_demo/fusion_ubuntu_dark.png">(click to enlarge)</a>  |  <a href="examples/fusion_style_demo/fusion_ubuntu_light.png">(click to enlarge)</a>  |
+
+
+## Versioning
+Version number is synchronized with CFLTK version. So "1.5.23.6" mean that binding was made on CFLTK version 1.5.23. The last part "6" is actualy PasFLTK version which will be increased in case of bug fixes / missing features
+
+Version: 1.5.23.6
 
 For CFLTK version: 1.5.23
 
 For FLTK version: 1.4.5
 
 ## History
+- 1.5.23.6
+  - Created "Fusion style" which imitate native system look and colors (see examples/fusion_style_demo). You need to patch your CFLTK source for some missing callbacks. I have created merge request on CFLTK repository so I hope that these changes will be soon included in official CFLTK.
+  - Fixes for building with `-dUSE_FLTK_CAIRO` and `-dUSE_FLTK_PANGO` switch on linux.  
 - 1.5.23.5
   - Added support for windows. So far it wasn't tested by me so I didn't know if it really works. Now I tested it and added fixes. Shared libs mode works perfectly, static linking has one issue wich I can't solve for now. I had to disable Drag&Drop to make it work. If you need it then you must switch to shared libs mode.
   - Fixed wrong descendants 
@@ -70,7 +85,9 @@ For FLTK version: 1.4.5
 - Windows msys2 MinGW64 GCC 16.1.0-5 64bit
 
 ## Building CFLTK and FLTK libs (Linux)
-You need to get FLTK and CFLTK sources first and build them. Depending on whether you want to make your app as statically linking libs (libcfltk.a, libfltk.a, etc) whis is default (but still experimental) or use shared library (PasFLT `-dUSE_FLTK_SHARED_LIBS` option), you need to build CFLTK and FLTK with `-DFLTK_BUILD_SHARED_LIBS` and `-DCFLTK_BUILD_SHARED` set to `ON` or `OFF`:
+You need to get FLTK and CFLTK sources first and build them. Make sure that you download official release supported by PasFLTK, clones from git could be incompatible. Also, before building CFLTK, you need to patch CFLTK source for missing callbacks which were added in PasFLTK ver. 1.5.23.6. 
+
+Depending on whether you want to make your app as statically linking libs (libcfltk.a, libfltk.a, etc) whis is default (but still experimental) or use shared library (PasFLT `-dUSE_FLTK_SHARED_LIBS` option), you need to build CFLTK and FLTK with `-DFLTK_BUILD_SHARED_LIBS` and `-DCFLTK_BUILD_SHARED` set to `ON` or `OFF`:
 - Static linking (default from version 1.5.23.4): Your executable will contain all necessary C / C++ code. You don't need to deploy any libraries related to CFLTK / FLTK, only OS / platform. This will produce larger executable file but in summary it is smaller than prividing shared libs because linker use only necessary objects from *.a libs. This mode is still experimental and I'm still fixing linking issues. On `Linux` everything should works fine. On `Windows` there is issue with linking `ole32.a` - there is not solved yet Access Violation in Drag&Drop functionality so I had to disable it for time beeing. If you need Drag&Drop in your app then you must switch to shared libs mode.
 For static linking you need also set `-Xe` param for Free Pascal compiler, otherwise you may get error `Failed reading coff file, invalid section index while reading libcfltk.a(cfl_window.cpp.obj)`. You can set it in compiler options in your Lazarus project options or pass to FPC compiler command.
 - Shared linking. Your executable will be smaller but you need to deploy CFLT / FLTK libraries with your app (libcfltk.so, lifltk.so / cfltk.dll, fltk.dll). See "Deploying your app" section for more info.
@@ -80,7 +97,8 @@ Another thing for static linking. On Windows you may notce compiler error `Dwarf
 Prepare CFLTK and FLTK:
 1. Extract CFLTK to some directory, for example "cfltk". 
 2. Then extract FLTK and move everything to the "cfltk/fltk" directory
-3. In "cfltk" root directory, call `cmake` command. Depending if you want static linking or shared libs, you must use `-DFLTK_BUILD_SHARED_LIBS` and `-DCFLTK_BUILD_SHARED` switch.  For example (if you need pango or cairo, swith it on) for static linking:
+3. Copy files from `<PasFLTK source dir>/src/patches/cfltk_1_5_23` by replace `cfl.cpp` in `<CFLTK source dir>/src` dir and `cfl.h` in `<CFLTK source dir>/include/cfltk` dir.
+4. In "cfltk" root directory, call `cmake` command. Depending if you want static linking or shared libs, you must use `-DFLTK_BUILD_SHARED_LIBS` and `-DCFLTK_BUILD_SHARED` switch.  For example (if you need pango or cairo, swith it on) for static linking:
 ```
 cmake -B bin -S . \
                 -DCMAKE_BUILD_TYPE=Release \
@@ -98,11 +116,11 @@ cmake -B bin -S . \
                 -DFLTK_BUILD_PDF_DOCS=OFF \
                 -DFLTK_USE_PANGO=OFF
 ```
-4. Then build libraries:
+5. Then build libraries:
 ```
 cmake --build bin --parallel
 ```
-5. This will produce series of *.a libs or in case of shared libs - one single libcfltk.so / cfltk.dll library containing CFLTK and also FLTK source. In shared libs mode you don't need separated libfltk.so, libfltk_images.so, libfltk_forms.so etc. Everything your app need will be in one libcfltk.so / cfltk.dll. You can find libcfltk.a / libcflt.so/dll in "cfltk/bin" directory and FLTK *.a libs in "cfltk/bin/fltk/lib" directory.
+6. This will produce series of *.a libs or in case of shared libs - one single libcfltk.so / cfltk.dll library containing CFLTK and also FLTK source. In shared libs mode you don't need separated libfltk.so, libfltk_images.so, libfltk_forms.so etc. Everything your app need will be in one libcfltk.so / cfltk.dll. You can find libcfltk.a / libcflt.so/dll in "cfltk/bin" directory and FLTK *.a libs in "cfltk/bin/fltk/lib" directory.
 
 ## Building CFLTK and FLTK libs (Windows)
 On windows, steps are very similar to Linux one so read section above. For build toolchain I recommend MSYS2 from [www.msys2.org](www.msys2.org) where you get GCC compiler, CMake and all what you need. 

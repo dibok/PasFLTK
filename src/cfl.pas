@@ -69,10 +69,21 @@ uses
     {$IFDEF USE_FLTK_PANGO}
       {$LINKLIB pango-1.0}
       {$LINKLIB pangoxft-1.0}
+      {$LINKLIB gobject-2.0}
     {$ENDIF}
     {$IFDEF USE_FLTK_CAIRO}
       {$LINKLIB cairo}
       {$LINKLIB pangocairo-1.0}
+      {$IFDEF LINUX}
+        {$LINKLIB wayland-client}
+        {$LINKLIB dbus-1}
+        {$LINKLIB xkbcommon}
+        {$LINKLIB decor-0}
+        {$LINKLIB wayland-cursor}
+      {$ENDIF}
+      {$IFDEF WINDOWS}
+      TODO
+      {$ENDIF}
     {$ENDIF}
     {$IFDEF LINUX}
       {$LINKLIB dl}
@@ -423,6 +434,8 @@ type
   function Fl_darker(c:dword):dword;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_darker';
 
   procedure Fl_set_box_type_cb(_para1:longint; cb:Fl_ArgCallback4; _para3:longint; _para4:longint; _para5:longint;_para6:longint);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_set_box_type_cb';
+
+  procedure Fl_set_box_type_with_focus_cb(_para1:longint; cb:Fl_ArgCallback4; _para3:longint; _para4:longint; _para5:longint;_para6:longint; cbf:Fl_ArgCallback9);cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_set_box_type_with_focus_cb';
 
   function Fl_draw_box_active:longint;cdecl;external {$IFDEF USE_FLTK_SHARED_LIBS}External_library {$ENDIF}name 'Fl_draw_box_active';
 
